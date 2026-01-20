@@ -1,5 +1,9 @@
+/* src/index.css */
+
+/* 1. ย้าย @import มาไว้บรรทัดแรกสุด */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;700&display=swap');
+
+/* 2. ตามด้วย @tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;700&display=swap');
