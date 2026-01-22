@@ -10,32 +10,41 @@ export default {
         serif: ['"Noto Serif Thai"', 'serif'],
         sans: ['"Noto Sans Thai"', 'sans-serif'],
       },
-      colors: {
-        royal: {
-          dark: '#1a0b2e',   // ม่วงมืด (พื้นหลัง)
-          purple: '#431259', // ม่วงหลัก
-          gold: '#d4af37',   // ทองมาตรฐาน
-        }
-      },
-      backgroundImage: {
-        // ไล่เฉดสีทองคำเปลว (มีเงา มีแสง)
-        'gold-gradient': 'linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c)',
-        // ไล่เฉดสีม่วงไหมไทย
-        'purple-gradient': 'radial-gradient(circle at center, #5e2a7e 0%, #2a0e38 100%)',
-        'thai-pattern': "url('https://www.transparenttextures.com/patterns/black-scales.png')",
-      },
+      // เพิ่ม Animation ตรงนี้ครับ (ก๊อปปี้ไปวางได้เลย)
       animation: {
-        'marquee': 'marquee 25s linear infinite', // ตัววิ่ง
-        'shimmer': 'shimmer 3s linear infinite', // แสงวิบวับ
+        'float': 'float 4s ease-in-out infinite',
+        'float-up': 'floatUp 25s linear infinite',
+        'spin-slow': 'spin 8s linear infinite',
+        'marquee': 'marquee 40s linear infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'glow': 'glow 2s ease-in-out infinite',
       },
       keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(-100%)' },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
         },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% center' },
-          '100%': { backgroundPosition: '200% center' },
+        floatUp: {
+          '0%': { transform: 'translateY(100vh) scale(0.8)', opacity: '0' },
+          '10%': { opacity: '0.8' },
+          '90%': { opacity: '0.8' },
+          '100%': { transform: 'translateY(-10vh) scale(0.6)', opacity: '0' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        glow: {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(212, 175, 55, 0.6)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        scaleUp: {
+          '0%': { opacity: '0', transform: 'scale(0.95) translateY(20px)' },
+          '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
         }
       }
     },
