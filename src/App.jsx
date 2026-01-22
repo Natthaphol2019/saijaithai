@@ -2,7 +2,8 @@
 import React from 'react';
 import Navbar from './components/Navbar'; 
 
-// Import Sections (ตรวจสอบให้แน่ใจว่าไฟล์เหล่านี้มีอยู่จริงในโฟลเดอร์ sections)
+// Import Sections
+import HeroSection from './sections/HeroSection';
 import StatsSection from './sections/StatsSection';
 import ActivitiesSection from './sections/ActivitiesSection';
 import GallerySection from './sections/GallerySection';
@@ -10,7 +11,6 @@ import ImpactSection from './sections/ImpactSection';
 
 // Import Components
 import Footer from './components/Footer';
-import HeroSection from './sections/HeroSection';
 
 export default function App() {
 
@@ -32,7 +32,7 @@ export default function App() {
       <Navbar scrollToSection={scrollToSection} />
       
       {/* ส่วนที่ 1: หน้าแรก */}
-      <HeroSection/>
+      <HeroSection />
       
       {/* ส่วนที่ 2: สถิติ */}
       <section className="relative overflow-hidden border-b border-[#b38728]/20">
