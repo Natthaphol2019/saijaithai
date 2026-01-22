@@ -1,58 +1,36 @@
+// src/sections/TimelineItem.jsx
 import React from 'react';
 import { Star } from 'lucide-react';
-import TimelineItem from './TimelineItem'; // ดึงจาก components
 
-export default function ActivitiesSection() {
+export default function TimelineItem({ year, title, desc, img }) {
   return (
-    <div className="max-w-6xl mx-auto px-6">
+    <div className="flex flex-col md:flex-row gap-10 items-center bg-[#2a0e38]/40 backdrop-blur-md p-10 rounded-2xl hover:scale-[1.02] transition-all duration-500 border border-[#b38728]/30 group hover:border-[#d4af37]/60 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)]">
       
-      {/* Header */}
-      <div className="text-center mb-24 space-y-8">
-        <div className="relative inline-block animate-float">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#bf953f] to-[#aa771c] blur-2xl opacity-30 rounded-full"></div>
-          <div className="w-20 h-20 mx-auto bg-gradient-to-br from-[#bf953f] to-[#aa771c] rounded-full p-[3px] shadow-2xl relative">
-            <div className="w-full h-full bg-[#0d0221] rounded-full flex items-center justify-center text-4xl">👑</div>
-          </div>
+      {/* ส่วนรูปภาพ */}
+      <div className="md:w-2/5 w-full">
+        <div className="aspect-[4/3] rounded-xl overflow-hidden border-2 border-[#b38728]/30 shadow-2xl group-hover:border-[#d4af37]/60 transition-all duration-500">
+          <img 
+            src={img} 
+            alt={title} 
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" 
+          />
         </div>
-        
-        <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] leading-tight drop-shadow-lg">
-          "ช่วยเพื่อให้เขา... ช่วยเหลือตนเองได้"
-        </h2>
-        
-        <div className="bg-[#2a0e38]/40 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto border border-[#b38728]/30 hover:border-[#d4af37]/50 transition-all">
-          <p className="text-[#fcf6ba]/90 text-2xl font-light italic leading-relaxed">
-            "การสงเคราะห์ทหารผ่านศึกนั้น... ขอให้ช่วยเพื่อให้เขาช่วยเหลือตัวเองได้ ไม่ใช่ให้เขาตลอดไป"
-          </p>
+      </div>
+      
+      {/* ส่วนเนื้อหา */}
+      <div className="md:w-3/5 text-left space-y-4">
+        <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#bf953f] to-[#aa771c] text-[#1a0b2e] px-5 py-2 rounded-full font-bold text-xl shadow-lg">
+          <Star size={18} />
+          {year}
         </div>
-        
-        <div className="inline-flex items-center gap-3 bg-[#2a0e38]/60 py-3 px-6 rounded-full border border-[#b38728]/50 shadow-md">
-          <Star size={16} className="text-[#d4af37]" />
-          <span className="text-[#d4af37] font-bold tracking-widest uppercase text-sm">พระราชดำรัส รัชกาลที่ ๙</span>
-          <Star size={16} className="text-[#d4af37]" />
-        </div>
+        <h4 className="text-3xl text-[#fcf6ba] font-bold font-serif leading-tight">
+          {title}
+        </h4>
+        <p className="text-[#f4f4f0]/85 leading-loose font-sans text-lg">
+          {desc}
+        </p>
       </div>
 
-      {/* Timeline */}
-      <div className="space-y-16">
-        <TimelineItem 
-          year="๒๕๑๘" 
-          title="จุดกำเนิดสายใจไทย" 
-          desc="พระบาทสมเด็จพระเจ้าอยู่หัว รัชกาลที่ ๙ เสด็จฯ เยี่ยมทหารเจ็บป่วย ทรงตระหนักว่าลำพังเงินช่วยเหลือราชการอาจไม่เพียงพอ จึงพระราชทานพระราชทรัพย์ส่วนพระองค์ก่อตั้งมูลนิธิฯ เพื่อสร้างอนาคตที่ยั่งยืนให้กับทหารผ่านศึกและครอบครัว"
-          img="https://placehold.co/700x500/2a0e38/d4af37?text=Rama+IX+1975"
-        />
-        <TimelineItem 
-          year="๒๕๒๓" 
-          title="ศูนย์ฝึกอาชีพทหารผ่านศึก" 
-          desc="เริ่มโครงการฝึกอาชีพเพื่อให้ผู้ทุพพลภาพมีรายได้เลี้ยงตนเองอย่างยั่งยืน โดยเริ่มจากงานเย็บกระเป๋าหนังและงานแก้ว ส่งจำหน่ายที่ร้านจิตรลดา พัฒนาทักษะให้เป็นช่างฝีมือระดับมืออาชีพ"
-          img="https://placehold.co/700x500/2a0e38/d4af37?text=Vocational+Training"
-        />
-        <TimelineItem 
-          year="๒๕๔๕" 
-          title="ขยายโครงการสู่ภูมิภาค" 
-          desc="เปิดศูนย์ฝึกอาชีพในภูมิภาคต่างๆ ครอบคลุมทั่วประเทศ พร้อมพัฒนาหลักสูตรให้สอดคล้องกับความต้องการของตลาดแรงงานในแต่ละพื้นที่ รวมทั้งสร้างเครือข่ายการจำหน่ายผลิตภัณฑ์ในวงกว้าง"
-          img="https://placehold.co/700x500/2a0e38/d4af37?text=Expansion+2002"
-        />
-      </div>
     </div>
   );
 }

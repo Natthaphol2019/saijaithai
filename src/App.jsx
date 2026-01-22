@@ -1,4 +1,4 @@
-// src/App.jsx
+// src/App.jsx (เวอร์ชันที่คุณส่งมา - ถูกต้อง ✅)
 import React from 'react';
 import Navbar from './components/Navbar'; 
 

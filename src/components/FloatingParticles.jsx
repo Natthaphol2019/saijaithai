@@ -39,7 +39,7 @@ export default function FloatingParticles() {
             className="absolute -bottom-40 flex flex-col items-center opacity-0"
             style={{
               left: `${randomLeft}%`,
-              animation: `floatUp ${randomDuration}s linear infinite`, // ใช้ชื่อ animation ให้ตรงกับ config
+              animation: `floatUp ${randomDuration}s linear infinite`,
               animationDelay: `${randomDelay}s`,
               transform: `scale(${randomScale})`
             }}
