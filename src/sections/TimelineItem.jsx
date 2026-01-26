@@ -8,7 +8,7 @@ export default function TimelineItem({ year, title, desc, img }) {
       
       {/* ส่วนรูปภาพ */}
       <div className="md:w-2/5 w-full">
-        <div className="aspect-[4/3] rounded-xl overflow-hidden border-2 border-[#b38728]/30 shadow-2xl group-hover:border-[#d4af37]/60 transition-all duration-500">
+        <div className="aspect-[4/4] rounded-xl overflow-hidden border-2 border-[#b38728]/30 shadow-2xl group-hover:border-[#d4af37]/60 transition-all duration-600">
           <img 
             src={img} 
             alt={title} 

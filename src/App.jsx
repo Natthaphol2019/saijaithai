@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 
 // Import Sections
 import HeroSection from './sections/HeroSection';
+import ChairpersonSection from './sections/ChairpersonSection';
 import StatsSection from './sections/StatsSection';
 import ActivitiesSection from './sections/ActivitiesSection';
 import GallerySection from './sections/GallerySection';
@@ -23,7 +24,6 @@ export default function App() {
 
   return (
     <div className="bg-[#0d0221] font-serif text-white min-h-screen relative overflow-x-hidden selection:bg-[#d4af37] selection:text-[#1a0b2e]">
-
       {/* Background Layers */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_#5e2a7e_0%,_#2a0e38_50%,_#0d0221_100%)] -z-20"></div>
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-[#d4af37]/10 blur-[200px] rounded-full pointer-events-none -z-10"></div>
@@ -33,7 +33,7 @@ export default function App() {
       
       {/* ส่วนที่ 1: หน้าแรก */}
       <HeroSection />
-      
+      <ChairpersonSection />
       {/* ส่วนที่ 2: สถิติ */}
       <section className="relative overflow-hidden border-b border-[#b38728]/20">
         <div className="absolute inset-0 bg-gradient-to-b from-[#2a0e38]/50 to-transparent"></div>
