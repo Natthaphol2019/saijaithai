@@ -1,4 +1,4 @@
-// src/App.jsx (เวอร์ชันที่คุณส่งมา - ถูกต้อง ✅)
+// src/App.jsx
 import React from 'react';
 import Navbar from './components/Navbar'; 
 
@@ -12,6 +12,7 @@ import ImpactSection from './sections/ImpactSection';
 
 // Import Components
 import Footer from './components/Footer';
+import ScrollAnimation from './components/ScrollAnimation'; // อย่าลืมสร้างไฟล์นี้ตามที่คุยกันรอบก่อนนะครับ
 
 export default function App() {
 
@@ -31,31 +32,54 @@ export default function App() {
       {/* Components */}
       <Navbar scrollToSection={scrollToSection} />
       
-      {/* ส่วนที่ 1: หน้าแรก */}
-      <HeroSection />
-      <ChairpersonSection />
+      {/* ส่วนที่ 1: หน้าแรก (ไม่ต้องครอบ Animation เพราะโชว์ทันที) */}
+      <div id="home">
+        <HeroSection />
+      </div>
+      
+      {/* ส่วนองค์ประธาน */}
+      <div id="chairperson">
+        <ScrollAnimation>
+          <ChairpersonSection />
+        </ScrollAnimation>
+      </div>
+
       {/* ส่วนที่ 2: สถิติ */}
-      <section className="relative overflow-hidden border-b border-[#b38728]/20">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2a0e38]/50 to-transparent"></div>
-        <StatsSection />
-      </section>
+      <ScrollAnimation>
+        <section className="relative overflow-hidden border-b border-[#b38728]/20">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2a0e38]/50 to-transparent"></div>
+          <StatsSection />
+        </section>
+      </ScrollAnimation>
 
       {/* ส่วนที่ 3: กิจกรรม */}
-      <section id="activities" className="min-h-screen py-24 border-t border-[#b38728]/20 bg-[#2a0e38]/20 backdrop-blur-sm relative">
-        <ActivitiesSection />
-      </section>
+      <div id="activities">
+        <ScrollAnimation>
+          <section className="min-h-screen py-24 border-t border-[#b38728]/20 bg-[#2a0e38]/20 backdrop-blur-sm relative">
+            <ActivitiesSection />
+          </section>
+        </ScrollAnimation>
+      </div>
 
       {/* ส่วนที่ 4: ผลกระทบ */}
-      <section id="impact" className="min-h-screen py-24 relative">
-         <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#5e2a7e]/20 blur-[120px] rounded-full -z-10"></div>
-         <ImpactSection />
-      </section>
+      <div id="impact">
+        <ScrollAnimation>
+          <section className="min-h-screen py-24 relative">
+              <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#5e2a7e]/20 blur-[120px] rounded-full -z-10"></div>
+              <ImpactSection />
+          </section>
+        </ScrollAnimation>
+      </div>
 
       {/* ส่วนที่ 5: หอศิลป์ */}
-      <section id="gallery" className="min-h-screen py-24 relative">
-        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#d4af37]/10 blur-[150px] rounded-full -z-10"></div>
-        <GallerySection />
-      </section>
+      <div id="products"> {/* แก้ id ให้ตรงกับ Navbar (products หรือ gallery) */}
+        <ScrollAnimation>
+          <section className="min-h-screen py-24 relative">
+            <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#d4af37]/10 blur-[150px] rounded-full -z-10"></div>
+            <GallerySection />
+          </section>
+        </ScrollAnimation>
+      </div>
 
       {/* Footer */}
       <footer className="border-t border-[#b38728]/20 glass py-12">
