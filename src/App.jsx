@@ -1,5 +1,5 @@
 // src/App.jsx
-import React from 'react';
+import React, { useState } from 'react'; // ✅ 1. เพิ่ม useState
 import Navbar from './components/Navbar'; 
 
 // Import Sections
@@ -12,9 +12,12 @@ import ImpactSection from './sections/ImpactSection';
 
 // Import Components
 import Footer from './components/Footer';
-import ScrollAnimation from './components/ScrollAnimation'; // อย่าลืมสร้างไฟล์นี้ตามที่คุยกันรอบก่อนนะครับ
+import ScrollAnimation from './components/ScrollAnimation';
+import WelcomePopup from './components/WelcomePopup'; // ✅ 2. Import Popup ที่สร้างไว้
 
 export default function App() {
+  // ✅ 3. สร้าง State ควบคุม Popup (ค่าเริ่มต้น true = แสดงทันทีที่เข้าเว็บ)
+  const [showPopup, setShowPopup] = useState(true);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -25,6 +28,10 @@ export default function App() {
 
   return (
     <div className="bg-[#0d0221] font-serif text-white min-h-screen relative overflow-x-hidden selection:bg-[#d4af37] selection:text-[#1a0b2e]">
+      
+      {/* ✅ 4. แสดง Popup (แสดงเมื่อ showPopup เป็น true) */}
+      {showPopup && <WelcomePopup onClose={() => setShowPopup(false)} />}
+
       {/* Background Layers */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_#5e2a7e_0%,_#2a0e38_50%,_#0d0221_100%)] -z-20"></div>
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-[#d4af37]/10 blur-[200px] rounded-full pointer-events-none -z-10"></div>
@@ -32,7 +39,7 @@ export default function App() {
       {/* Components */}
       <Navbar scrollToSection={scrollToSection} />
       
-      {/* ส่วนที่ 1: หน้าแรก (ไม่ต้องครอบ Animation เพราะโชว์ทันที) */}
+      {/* ส่วนที่ 1: หน้าแรก */}
       <div id="home">
         <HeroSection />
       </div>
@@ -72,7 +79,7 @@ export default function App() {
       </div>
 
       {/* ส่วนที่ 5: หอศิลป์ */}
-      <div id="products"> {/* แก้ id ให้ตรงกับ Navbar (products หรือ gallery) */}
+      <div id="gallery"> 
         <ScrollAnimation>
           <section className="min-h-screen py-24 relative">
             <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#d4af37]/10 blur-[150px] rounded-full -z-10"></div>
