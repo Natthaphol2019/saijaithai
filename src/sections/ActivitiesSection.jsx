@@ -11,8 +11,8 @@ export default function ActivitiesSection() {
       {/* Header */}
       <div className="text-center mb-24 space-y-8">
         
-        
-        <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] leading-tight drop-shadow-lg">
+        {/* 👇 แก้ไขตรงนี้: เปลี่ยน leading-tight เป็น leading-relaxed และเพิ่ม py-2 */}
+        <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] leading-relaxed py-2 drop-shadow-lg">
           "ช่วยเพื่อให้เขา... ช่วยเหลือตนเองได้"
         </h2>
         

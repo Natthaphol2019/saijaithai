@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState } from 'react'; // ✅ 1. เพิ่ม useState
+import React, { useState } from 'react'; 
 import Navbar from './components/Navbar'; 
 
 // Import Sections
@@ -9,14 +9,14 @@ import StatsSection from './sections/StatsSection';
 import ActivitiesSection from './sections/ActivitiesSection';
 import GallerySection from './sections/GallerySection';
 import ImpactSection from './sections/ImpactSection'; 
+import DonationSection from './sections/DonationSection'; // ✅ 1. เพิ่ม Import DonationSection
 
 // Import Components
-import Footer from './components/Footer';
+import Footer from './components/Footer'; // (แก้ไข path ตามที่ซีส่งมาตอนแรก หรือถ้าเป็น components/Footer ก็แก้กลับได้ครับ)
 import ScrollAnimation from './components/ScrollAnimation';
-import WelcomePopup from './components/WelcomePopup'; // ✅ 2. Import Popup ที่สร้างไว้
+import WelcomePopup from './components/WelcomePopup'; 
 
 export default function App() {
-  // ✅ 3. สร้าง State ควบคุม Popup (ค่าเริ่มต้น true = แสดงทันทีที่เข้าเว็บ)
   const [showPopup, setShowPopup] = useState(true);
 
   const scrollToSection = (id) => {
@@ -29,7 +29,6 @@ export default function App() {
   return (
     <div className="bg-[#0d0221] font-serif text-white min-h-screen relative overflow-x-hidden selection:bg-[#d4af37] selection:text-[#1a0b2e]">
       
-      {/* ✅ 4. แสดง Popup (แสดงเมื่อ showPopup เป็น true) */}
       {showPopup && <WelcomePopup onClose={() => setShowPopup(false)} />}
 
       {/* Background Layers */}
@@ -44,7 +43,7 @@ export default function App() {
         <HeroSection />
       </div>
       
-      {/* ส่วนองค์ประธาน */}
+      {/* ส่วนองค์ประธาน (ถ้าซีมีไฟล์นี้แล้ว) */}
       <div id="chairperson">
         <ScrollAnimation>
           <ChairpersonSection />
@@ -85,6 +84,15 @@ export default function App() {
             <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#d4af37]/10 blur-[150px] rounded-full -z-10"></div>
             <GallerySection />
           </section>
+        </ScrollAnimation>
+      </div>
+
+      {/* ✅ ส่วนที่ 6: ร่วมบริจาค (แทรกใหม่ตรงนี้) */}
+      <div id="donate">
+        <ScrollAnimation>
+           <section className="relative border-t-2 border-[#d4af37]/30 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+              <DonationSection />
+           </section>
         </ScrollAnimation>
       </div>
 
