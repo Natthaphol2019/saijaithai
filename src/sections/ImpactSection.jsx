@@ -1,15 +1,12 @@
 // src/sections/ImpactSection.jsx
 import React, { useState } from 'react';
 import { Heart, Hammer, BookOpen, ArrowRight, X, Sparkles } from 'lucide-react';
-// 1. Import Framer Motion
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ImpactSection() {
-  // 2. State สำหรับเก็บว่าการ์ดใบไหนถูกเลือก (ถ้าไม่มีคือ null)
   const [selectedItem, setSelectedItem] = useState(null);
 
   const impacts = [
-    // ... ข้อมูลเดิมของคุณ ...
     {
       id: 1,
       title: "สร้างอาชีพ... สร้างชีวิตใหม่",
@@ -17,7 +14,6 @@ export default function ImpactSection() {
       icon: <Hammer size={24} />,
       img: "/images/images1003.jpg", 
       stat: "๔,๐๐๐+ ครอบครัว",
-      // เพิ่มเนื้อหาแบบยาวสำหรับหน้า Detail
       longDesc: "จากการที่เคยเป็นผู้เสียสละในสนามรบ วันนี้พวกเขากลับมายืนหยัดได้อีกครั้งในฐานะช่างฝีมือผู้เชี่ยวชาญ โครงการฝึกอาชีพของเราไม่เพียงแต่มอบทักษะการทำงานแก้ว งานหนัง และงานประดิษฐ์ แต่ยังเป็นการฟื้นฟูความมั่นใจและศักดิ์ศรีความเป็นมนุษย์ ให้พวกเขาสามารถสร้างรายได้เลี้ยงดูครอบครัว และเป็นที่พึ่งของสังคมต่อไป"
     },
     {
@@ -43,20 +39,23 @@ export default function ImpactSection() {
   return (
     <section className="py-24 px-6 relative overflow-hidden bg-[#1a0b2e]">
       
-      {/* Background Decoration (เหมือนเดิม) */}
+      {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#d4af37] rounded-full blur-[200px] opacity-5 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#bf953f] rounded-full blur-[150px] opacity-5 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Header Section (เหมือนเดิม) */}
+        {/* Header Section */}
         <div className="text-center mb-20 space-y-6">
           <div className="inline-block p-3 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 mb-4 animate-float">
              <Heart size={32} className="text-[#d4af37] fill-[#d4af37]/20" />
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] font-serif">
+          
+          {/* ✅ แก้ไขจุดที่ 1: เพิ่ม py-2 และ leading-tight เพื่อให้สระ/วรรณยุกต์ไม่โดนตัด */}
+          <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] font-serif py-2 leading-tight">
             ภารกิจแห่งการ "ให้" ที่ยั่งยืน
           </h2>
+
           <p className="text-[#fcf6ba]/70 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed">
             "การสงเคราะห์ทหารผ่านศึกนั้น... ขอให้ช่วยเพื่อให้เขาช่วยเหลือตนเองได้ ไม่ใช่ให้เขาตลอดไป"
             <br/>
@@ -67,19 +66,18 @@ export default function ImpactSection() {
         {/* Grid Cards */}
         <div className="grid md:grid-cols-3 gap-8">
           {impacts.map((item) => (
-            // 3. เปลี่ยน div เป็น motion.div และเพิ่ม onClick
             <motion.div 
               key={item.id}
-              layoutId={`card-container-${item.id}`} // layoutId สำหรับการ Morph
+              layoutId={`card-container-${item.id}`}
               onClick={() => setSelectedItem(item)}
               className="group relative bg-[#2a0e38]/40 backdrop-blur-md border border-[#b38728]/30 rounded-3xl overflow-hidden hover:border-[#d4af37]/60 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] transition-all duration-500 cursor-pointer"
-              whileHover={{ y: -8 }} // ใช้ Framer Motion สำหรับ hover effect
+              whileHover={{ y: -8 }}
             >
               {/* Image Area */}
               <motion.div layoutId={`image-wrap-${item.id}`} className="h-64 overflow-hidden relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d0221] to-transparent z-10 opacity-80"></div>
                 <motion.img 
-                  layoutId={`image-${item.id}`} // layoutId สำหรับรูปภาพ
+                  layoutId={`image-${item.id}`}
                   src={item.img} 
                   alt={item.title} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
@@ -91,7 +89,6 @@ export default function ImpactSection() {
 
               {/* Text Content */}
               <div className="p-8 pt-10">
-                {/* layoutId สำหรับหัวข้อ */}
                 <motion.h3 layoutId={`title-${item.id}`} className="text-2xl font-bold text-[#fcf6ba] mb-3 group-hover:text-[#d4af37] transition-colors">
                   {item.title}
                 </motion.h3>
@@ -109,31 +106,27 @@ export default function ImpactSection() {
         </div>
       </div>
 
-      {/* --- 4. ส่วนของ Modal หน้าต่างขยาย (Expanded View) --- */}
+      {/* --- Modal Section --- */}
       <AnimatePresence>
         {selectedItem && (
-          // Backdrop พื้นหลังสีดำจางๆ
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 grid place-items-center p-4 overflow-y-auto"
           >
-             {/* คลิกพื้นหลังเพื่อปิด */}
             <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={() => setSelectedItem(null)}></div>
 
-            {/* ตัวการ์ดที่ขยายใหญ่ */}
             <motion.div
-              layoutId={`card-container-${selectedItem.id}`} // layoutId ตรงกับการ์ดเล็ก จะทำให้เกิดการ Morph
+              layoutId={`card-container-${selectedItem.id}`}
               className="relative w-full max-w-5xl bg-[#1a0b2e] border-2 border-[#d4af37] rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row z-10 my-8"
-              transition={{ type: "spring", stiffness: 300, damping: 30 }} // ตั้งค่าความเด้งของ Animation
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
-              {/* ปุ่มปิด */}
               <button onClick={() => setSelectedItem(null)} className="absolute top-4 right-4 z-20 bg-black/40 text-white p-2 rounded-full hover:bg-[#d4af37] hover:text-black transition backdrop-blur-sm">
                 <X size={24} />
               </button>
 
-              {/* รูปภาพฝั่งซ้าย (ขยายจากรูปเล็ก) */}
+              {/* รูปภาพฝั่งซ้าย */}
               <motion.div layoutId={`image-wrap-${selectedItem.id}`} className="md:w-1/2 relative h-72 md:h-auto">
                  <motion.img 
                    layoutId={`image-${selectedItem.id}`}
@@ -150,18 +143,16 @@ export default function ImpactSection() {
                     <span className="text-sm font-bold uppercase tracking-wider">ภารกิจสายใจไทย</span>
                  </div>
                  
-                 {/* หัวข้อ (ขยายจากหัวข้อเล็ก) */}
                  <motion.h3 layoutId={`title-${selectedItem.id}`} className="text-3xl md:text-4xl font-bold text-[#d4af37] mb-6 font-serif leading-tight">
                     {selectedItem.title}
                  </motion.h3>
 
                  <div className="w-20 h-1 bg-[#d4af37]/30 mb-8"></div>
 
-                 {/* เนื้อหาแบบยาว (ใช้ Fade in เข้ามาทีหลัง) */}
                  <motion.div
                    initial={{ opacity: 0, y: 20 }}
                    animate={{ opacity: 1, y: 0 }}
-                   transition={{ delay: 0.2 }} // ดีเลย์นิดนึงให้การ์ดขยายเสร็จก่อน
+                   transition={{ delay: 0.2 }}
                    className="space-y-6"
                  >
                     <p className="text-[#fcf6ba]/90 text-lg leading-relaxed font-light">
