@@ -44,7 +44,7 @@ export default function WelcomePopup({ onClose }) {
             {/* รูปภาพ Responsive */}
             {/* max-h-[60vh] สำหรับมือถือ (จะได้เหลือที่ปุ่ม), max-h-[80vh] สำหรับจอใหญ่ */}
             <img 
-              src="/images/1000years.jpg" 
+              src="/images/1000years.webp" 
               alt="Welcome Banner" 
               className="w-full h-auto max-h-[60vh] sm:max-h-[70vh] md:max-h-[80vh] object-contain block transform group-hover:scale-[1.02] transition-transform duration-1000 ease-out relative z-10"
             />

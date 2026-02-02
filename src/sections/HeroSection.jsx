@@ -41,10 +41,10 @@ export default function HeroSection() {
               <div className="aspect-[4/5] lg:aspect-[3/4] overflow-hidden rounded-[1.5rem] border border-[#d4af37]/20 relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d0221]/60 via-transparent to-transparent z-10"></div>
                 <img 
-                  src="/images/images1001.jpg" 
+                  src="/images/images1001.webp" 
                   alt="พระบาทสมเด็จพระบรมชนกาธิเบศรฯ" 
                   className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-1000"
-                  onError={(e) => e.target.src = "https://placehold.co/600x800/2a0e38/d4af37?text=Royal+Portrait"}
+                  onError={(e) => e.target.src = "/images/images1001.webp"}
                 />
               </div>
               {/* ลายไทยตกแต่ง */}
