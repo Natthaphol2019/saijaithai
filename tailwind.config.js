@@ -10,7 +10,7 @@ export default {
         serif: ['"Noto Serif Thai"', 'serif'],
         sans: ['"Noto Sans Thai"', 'sans-serif'],
       },
-      // เพิ่ม Animation ตรงนี้ครับ (ก๊อปปี้ไปวางได้เลย)
+      // ✅ เก็บไว้เฉพาะแอนิเมชั่นที่ใช้ใน Background / Hero
       animation: {
         'float': 'float 4s ease-in-out infinite',
         'float-up': 'floatUp 25s linear infinite',
@@ -24,7 +24,7 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-20px)' },
         },
-        floatUp: {
+        floatUp: { // ใช้กับเม็ดแสงลอยขึ้น
           '0%': { transform: 'translateY(100vh) scale(0.8)', opacity: '0' },
           '10%': { opacity: '0.8' },
           '90%': { opacity: '0.8' },
@@ -38,14 +38,7 @@ export default {
           '0%, 100%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)' },
           '50%': { boxShadow: '0 0 40px rgba(212, 175, 55, 0.6)' },
         },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        scaleUp: {
-          '0%': { opacity: '0', transform: 'scale(0.95) translateY(20px)' },
-          '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
-        }
+        // ❌ ลบ fadeIn และ scaleUp ออกแล้ว เพราะไม่ได้ใช้ใน Animation List ด้านบน
       }
     },
   },
