@@ -19,7 +19,7 @@ export default function ChairpersonSection() {
               <div className="aspect-[3/4] rounded-t-full rounded-b-xl overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.15)] relative group">
                 {/* รูป: แนะนำให้ใช้รูป [Image 20] หรือ [Image 21] จากไฟล์ Word */}
                 <img 
-                  src="/images/images1002.jpg" 
+                  src="/images/images1002.webp" 
                   alt="สมเด็จพระกนิษฐาธิราชเจ้าฯ" 
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   onError={(e) => {

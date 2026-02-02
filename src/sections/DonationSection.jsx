@@ -38,7 +38,7 @@ export default function DonationSection() {
 
     const qrData = [
         // ตรวจสอบ path รูปภาพให้ถูกต้อง
-        { name: 'พร้อมเพย์', img: '/images/qr1.png', fileName: 'donataion_promtpay.png', color: 'bg-[#003d68]' },
+        { name: 'พร้อมเพย์', img: '/images/qr1.webp', fileName: 'donataion_promtpay.webp', color: 'bg-[#003d68]' },
     ];
 
     // --- Actions ---
@@ -82,7 +82,7 @@ export default function DonationSection() {
                         <button 
                             onClick={(e) => {
                                 e.stopPropagation();
-                                handleDownloadImage(zoomImage, 'donation-qr.png');
+                                handleDownloadImage(zoomImage, 'donation-qr.webp');
                             }}
                             className="mt-6 flex items-center gap-2 bg-[#d4af37] text-[#1a0b2e] px-6 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
                         >
