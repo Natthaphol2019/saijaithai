@@ -1,5 +1,5 @@
 // src/sections/DonationSection.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // ✅ 1. เพิ่ม useEffect
 import { Copy, Download, Check, Phone, Mail, MapPin, Building, QrCode, Share2, Wallet, X, ZoomIn, Save } from 'lucide-react';
 
 export default function DonationSection() {
@@ -8,6 +8,19 @@ export default function DonationSection() {
     const [copied, setCopied] = useState('');
     const [selectedQrIndex, setSelectedQrIndex] = useState(0);
     const [zoomImage, setZoomImage] = useState(null);
+
+    // ✅ 2. เพิ่ม Effect: ล็อคหน้าจอไม่ให้เลื่อนเมื่อเปิดดูรูป QR Code
+    useEffect(() => {
+        if (zoomImage) {
+            // เมื่อเปิดรูป -> ล็อค Scroll
+            document.body.style.overflow = 'hidden';
+        } else {
+            // เมื่อปิดรูป -> ปลดล็อค
+            document.body.style.overflow = 'unset';
+        }
+        // คืนค่าเมื่อเปลี่ยนหน้า
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [zoomImage]);
 
     // --- Data Configuration ---
     const bankAccounts = [
@@ -38,7 +51,6 @@ export default function DonationSection() {
     ];
 
     const qrData = [
-        // ตรวจสอบชื่อไฟล์ให้ตรงกับใน folder public/images/
         { name: 'พร้อมเพย์', img: '/images/qr1.webp', fileName: 'donation_promtpay.webp', color: 'bg-[#003d68]' },
     ];
 
@@ -59,12 +71,12 @@ export default function DonationSection() {
     };
 
     return (
-        // ใช้ py-24 แทน min-h-screen เพื่อไม่ให้เกิดพื้นที่ว่างด้านล่าง
         <section id="donate" className="relative py-24 px-4 bg-[#f8f5f0] overflow-hidden">
             
             {/* --- Lightbox Modal (Zoom View) --- */}
             {zoomImage && (
-                <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in" onClick={() => setZoomImage(null)}>
+                <div className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in" onClick={() => setZoomImage(null)}>
+                    {/* เพิ่ม z-[9999] เพื่อให้มั่นใจว่าอยู่บนสุดแน่นอน */}
                     <div className="relative w-full max-w-lg flex flex-col items-center">
                         <button className="absolute -top-12 right-0 text-white/70 hover:text-white bg-white/10 rounded-full p-2 transition-colors">
                             <X size={24} />
