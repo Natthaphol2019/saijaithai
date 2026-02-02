@@ -1,9 +1,25 @@
 // src/sections/GallerySection.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // เพิ่ม useEffect
 import { X, Sparkles, Feather, ZoomIn } from 'lucide-react';
 
 export default function GallerySection() {
   const [selectedArt, setSelectedArt] = useState(null);
+
+  // ✅ เพิ่ม Effect นี้เพื่อล็อคการเลื่อนหน้าจอ (Scroll Lock) เมื่อเปิด Modal
+  useEffect(() => {
+    if (selectedArt) {
+      // เมื่อเปิด Modal -> ล็อคไม่ให้เลื่อน และเพิ่ม padding ขวาเพื่อกันภาพกระตุก (เพราะ scrollbar หาย)
+      document.body.style.overflow = 'hidden';
+    } else {
+      // เมื่อปิด Modal -> ปลดล็อคให้เลื่อนได้ปกติ
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup function: เผื่อ component ถูกทำลายขณะเปิด Modal อยู่ ให้ปลดล็อคคืน
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedArt]);
 
   const masterpieces = [
     { 
