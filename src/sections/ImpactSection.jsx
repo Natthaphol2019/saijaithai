@@ -1,7 +1,6 @@
 // src/sections/ImpactSection.jsx
 import React, { useState } from 'react';
 import { Heart, Hammer, BookOpen, ArrowRight, X, Sparkles } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ImpactSection() {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -39,19 +38,18 @@ export default function ImpactSection() {
   return (
     <section className="py-24 px-6 relative overflow-hidden bg-[#1a0b2e]">
       
-      {/* Background Decoration */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#d4af37] rounded-full blur-[200px] opacity-5 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#bf953f] rounded-full blur-[150px] opacity-5 pointer-events-none"></div>
+      {/* Background Decoration - ลด Blur ลงเพื่อ Performance ที่ดีขึ้นบนมือถือ */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d4af37] rounded-full blur-[100px] opacity-5 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#bf953f] rounded-full blur-[80px] opacity-5 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header Section */}
         <div className="text-center mb-20 space-y-6">
-          <div className="inline-block p-3 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 mb-4 animate-float">
+          <div className="inline-block p-3 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 mb-4 animate-pulse">
              <Heart size={32} className="text-[#d4af37] fill-[#d4af37]/20" />
           </div>
           
-          {/* ✅ แก้ไขจุดที่ 1: เพิ่ม py-2 และ leading-tight เพื่อให้สระ/วรรณยุกต์ไม่โดนตัด */}
           <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] font-serif py-2 leading-tight">
             ภารกิจแห่งการ "ให้" ที่ยั่งยืน
           </h2>
@@ -63,36 +61,33 @@ export default function ImpactSection() {
           </p>
         </div>
 
-        {/* Grid Cards */}
+        {/* Grid Cards - ใช้ CSS Hover แทน JS Animation */}
         <div className="grid md:grid-cols-3 gap-8">
           {impacts.map((item) => (
-            <motion.div 
+            <div 
               key={item.id}
-              layoutId={`card-container-${item.id}`}
               onClick={() => setSelectedItem(item)}
-              className="group relative bg-[#2a0e38]/40 backdrop-blur-md border border-[#b38728]/30 rounded-3xl overflow-hidden hover:border-[#d4af37]/60 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] transition-all duration-500 cursor-pointer"
-              whileHover={{ y: -8 }}
+              className="group relative bg-[#2a0e38]/40 backdrop-blur-md border border-[#b38728]/30 rounded-3xl overflow-hidden hover:border-[#d4af37]/60 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 cursor-pointer hover:-translate-y-2"
             >
               {/* Image Area */}
-              <motion.div layoutId={`image-wrap-${item.id}`} className="h-64 overflow-hidden relative">
+              <div className="h-64 overflow-hidden relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d0221] to-transparent z-10 opacity-80"></div>
-                <motion.img 
-                  layoutId={`image-${item.id}`}
+                <img 
                   src={item.img} 
                   alt={item.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   onError={(e) => {
                     e.target.src = "https://placehold.co/600x400/2a0e38/d4af37?text=Sai+Jai+Thai";
                   }}
                 />
-              </motion.div>
+              </div>
 
               {/* Text Content */}
               <div className="p-8 pt-10">
-                <motion.h3 layoutId={`title-${item.id}`} className="text-2xl font-bold text-[#fcf6ba] mb-3 group-hover:text-[#d4af37] transition-colors">
+                <h3 className="text-2xl font-bold text-[#fcf6ba] mb-3 group-hover:text-[#d4af37] transition-colors">
                   {item.title}
-                </motion.h3>
-                <p className="text-[#fcf6ba]/60 text-sm leading-relaxed mb-6 font-light">
+                </h3>
+                <p className="text-[#fcf6ba]/60 text-sm leading-relaxed mb-6 font-light line-clamp-3">
                   {item.desc}
                 </p>
                 
@@ -101,60 +96,47 @@ export default function ImpactSection() {
                   อ่านเรื่องราวเต็ม <ArrowRight size={16} />
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* --- Modal Section --- */}
-      <AnimatePresence>
-        {selectedItem && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 grid place-items-center p-4 overflow-y-auto"
-          >
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={() => setSelectedItem(null)}></div>
+      {/* --- Modal Section (Static Logic / ลื่นไหลกว่า) --- */}
+      {selectedItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onClick={() => setSelectedItem(null)}></div>
 
-            <motion.div
-              layoutId={`card-container-${selectedItem.id}`}
-              className="relative w-full max-w-5xl bg-[#1a0b2e] border-2 border-[#d4af37] rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row z-10 my-8"
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            >
-              <button onClick={() => setSelectedItem(null)} className="absolute top-4 right-4 z-20 bg-black/40 text-white p-2 rounded-full hover:bg-[#d4af37] hover:text-black transition backdrop-blur-sm">
-                <X size={24} />
-              </button>
+          {/* Modal Content */}
+          <div className="relative w-full max-w-5xl bg-[#1a0b2e] border border-[#d4af37] rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row z-10 max-h-[90vh]">
+             <button onClick={() => setSelectedItem(null)} className="absolute top-4 right-4 z-20 bg-black/40 text-white p-2 rounded-full hover:bg-[#d4af37] hover:text-black transition backdrop-blur-sm">
+               <X size={24} />
+             </button>
 
-              {/* รูปภาพฝั่งซ้าย */}
-              <motion.div layoutId={`image-wrap-${selectedItem.id}`} className="md:w-1/2 relative h-72 md:h-auto">
-                 <motion.img 
-                   layoutId={`image-${selectedItem.id}`}
+             {/* รูปภาพฝั่งซ้าย */}
+             <div className="md:w-1/2 relative h-64 md:h-auto shrink-0">
+                 <img 
                    src={selectedItem.img} 
                    className="w-full h-full object-cover"
+                   alt={selectedItem.title}
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a0b2e] via-transparent to-transparent md:bg-gradient-to-r"></div>
-              </motion.div>
+             </div>
 
-              {/* เนื้อหาฝั่งขวา */}
-              <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-[#1a0b2e]">
+             {/* เนื้อหาฝั่งขวา */}
+             <div className="md:w-1/2 p-8 md:p-12 flex flex-col bg-[#1a0b2e] overflow-y-auto">
                  <div className="flex items-center gap-2 mb-4 text-[#d4af37]">
                     <Sparkles size={18}/>
                     <span className="text-sm font-bold uppercase tracking-wider">ภารกิจสายใจไทย</span>
                  </div>
                  
-                 <motion.h3 layoutId={`title-${selectedItem.id}`} className="text-3xl md:text-4xl font-bold text-[#d4af37] mb-6 font-serif leading-tight">
+                 <h3 className="text-3xl md:text-4xl font-bold text-[#d4af37] mb-6 font-serif leading-tight">
                     {selectedItem.title}
-                 </motion.h3>
+                 </h3>
 
-                 <div className="w-20 h-1 bg-[#d4af37]/30 mb-8"></div>
+                 <div className="w-20 h-1 bg-[#d4af37]/30 mb-8 shrink-0"></div>
 
-                 <motion.div
-                   initial={{ opacity: 0, y: 20 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   transition={{ delay: 0.2 }}
-                   className="space-y-6"
-                 >
+                 <div className="space-y-6">
                     <p className="text-[#fcf6ba]/90 text-lg leading-relaxed font-light">
                       {selectedItem.longDesc}
                     </p>
@@ -168,12 +150,11 @@ export default function ImpactSection() {
                             ปิดหน้าต่าง
                         </button>
                     </div>
-                 </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                 </div>
+             </div>
+          </div>
+        </div>
+      )}
 
     </section>
   );
