@@ -1,20 +1,18 @@
 // src/sections/ActivitiesSection.jsx
 import React from 'react';
 import { Star } from 'lucide-react';
-import TimelineItem from './TimelineItem'; // ดึงจากไฟล์ TimelineItem.jsx
+import TimelineItem from './TimelineItem'; 
 
 export default function ActivitiesSection() {
   return (
     <div className="max-w-6xl mx-auto px-6">
       
-      {/* Header - ใช้ div ปกติเพื่อประสิทธิภาพสูงสุด */}
+      {/* Header */}
       <div className="text-center mb-24 space-y-8">
-        
         <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] leading-relaxed py-2 drop-shadow-lg">
           "ช่วยเพื่อให้เขา... ช่วยเหลือตนเองได้"
         </h2>
         
-        {/* เพิ่ม transition-all duration-500 เพื่อให้ตอนเอาเมาส์วาง ขอบค่อยๆ เปลี่ยนสีอย่างนุ่มนวล */}
         <div className="bg-[#2a0e38]/40 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto border border-[#b38728]/30 hover:border-[#d4af37]/50 transition-all duration-500">
           <p className="text-[#fcf6ba]/90 text-2xl font-light italic leading-relaxed">
             "การสงเคราะห์ทหารผ่านศึกนั้น... ขอให้ช่วยเพื่อให้เขาช่วยเหลือตัวเองได้ ไม่ใช่ให้เขาตลอดไป"
@@ -28,7 +26,7 @@ export default function ActivitiesSection() {
         </div>
       </div>
 
-      {/* Timeline (ข้อมูลจริง) - การเอา motion ออกจะทำให้การเลื่อน (Scroll) ไม่ติดขัด */}
+      {/* Timeline Content */}
       <div className="space-y-16">
         <TimelineItem 
           year="๒ เม.ย. ๒๕๑๘" 

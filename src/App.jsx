@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import HeroSection from './sections/HeroSection';
 import WelcomePopup from './components/WelcomePopup'; 
 
-// ใช้ lazy load สำหรับส่วนอื่นๆ เพื่อ performance
+// ใช้ lazy load สำหรับส่วนอื่นๆ
 const ChairpersonSection = lazy(() => import('./sections/ChairpersonSection'));
 const StatsSection = lazy(() => import('./sections/StatsSection'));
 const ActivitiesSection = lazy(() => import('./sections/ActivitiesSection'));
@@ -15,9 +15,11 @@ const ImpactSection = lazy(() => import('./sections/ImpactSection'));
 const DonationSection = lazy(() => import('./sections/DonationSection'));
 const Footer = lazy(() => import('./components/Footer'));
 
+// ปรับ Loader ให้ดูดีขึ้น ไม่กินพื้นที่เยอะเกินไป
 const SectionLoader = () => (
-  <div className="h-32 flex items-center justify-center text-[#d4af37] animate-pulse">
-    กำลังโหลดข้อมูล...
+  <div className="py-20 flex flex-col items-center justify-center space-y-4 text-[#d4af37] animate-pulse">
+    <div className="w-12 h-12 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin"></div>
+    <span className="text-sm font-light tracking-widest">กำลังโหลดข้อมูล...</span>
   </div>
 );
 
@@ -36,7 +38,7 @@ export default function App() {
       
       {showPopup && <WelcomePopup onClose={() => setShowPopup(false)} />}
 
-      {/* Background Layers */}
+      {/* Background Layers - ปรับตำแหน่งให้ Fixed อยู่กับที่ตลอด */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_#5e2a7e_0%,_#2a0e38_50%,_#0d0221_100%)] -z-20"></div>
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-[#d4af37]/10 blur-[200px] rounded-full pointer-events-none -z-10"></div>
 
@@ -58,20 +60,23 @@ export default function App() {
         </section>
 
         <div id="activities">
-          <section className="min-h-screen py-24 border-t border-[#b38728]/20 bg-[#2a0e38]/20 backdrop-blur-sm relative">
+          {/* เอา min-h-screen ออก ใช้ py-24 แทน เพื่อให้ความสูงพอดีกับเนื้อหา */}
+          <section className="py-24 border-t border-[#b38728]/20 bg-[#2a0e38]/20 backdrop-blur-sm relative">
             <ActivitiesSection />
           </section>
         </div>
 
         <div id="impact">
-          <section className="min-h-screen py-24 relative">
+          {/* เอา min-h-screen ออก */}
+          <section className="py-24 relative">
             <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#5e2a7e]/20 blur-[120px] rounded-full -z-10"></div>
             <ImpactSection />
           </section>
         </div>
 
         <div id="gallery"> 
-          <section className="min-h-screen py-24 relative">
+          {/* เอา min-h-screen ออก */}
+          <section className="py-24 relative">
             <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#d4af37]/10 blur-[150px] rounded-full -z-10"></div>
             <GallerySection />
           </section>

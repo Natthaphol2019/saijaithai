@@ -1,25 +1,12 @@
 // src/sections/StatsSection.jsx
-// แหล่งข้อมูล: https://www.saijaithai.or.th/
 import React from 'react';
 import { Award, Users, Sparkles } from 'lucide-react';
 
 export default function StatsSection() {
   const stats = [
-    { 
-      number: "๕๐", 
-      label: "ปีแห่งการให้ (ก่อตั้ง พ.ศ. ๒๕๑๘)", 
-      icon: Award 
-    },
-    { 
-      number: "๔,๐๐๐+", 
-      label: "สมาชิกและครอบครัวที่ดูแล", 
-      icon: Users 
-    },
-    { 
-      number: "๑,๐๐๐+", 
-      label: "ผลิตภัณฑ์งานฝีมือสร้างอาชีพ", 
-      icon: Sparkles 
-    },
+    { number: "๕๐", label: "ปีแห่งการให้ (ก่อตั้ง พ.ศ. ๒๕๑๘)", icon: Award },
+    { number: "๔,๐๐๐+", label: "สมาชิกและครอบครัวที่ดูแล", icon: Users },
+    { number: "๑,๐๐๐+", label: "ผลิตภัณฑ์งานฝีมือสร้างอาชีพ", icon: Sparkles },
   ];
 
   return (

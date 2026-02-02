@@ -2,7 +2,6 @@
 import React from 'react';
 
 export default function TimelineItem({ year, title, desc, img }) {
-  // ลบ motion ออก เปลี่ยนเป็น div ธรรมดา
   return (
     <div className="flex flex-col md:flex-row items-center gap-8 group">
       {/* ส่วนรูปภาพ */}
@@ -10,14 +9,15 @@ export default function TimelineItem({ year, title, desc, img }) {
         <img 
           src={img} 
           alt={title} 
-          loading="lazy" // ช่วยเรื่องโหลดรูปในมือถือ
+          loading="lazy"
           className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" 
+          onError={(e) => { e.target.src = "https://placehold.co/600x400/2a0e38/d4af37?text=Timeline+Image"; }}
         />
       </div>
 
       {/* ส่วนเนื้อหา */}
       <div className="w-full md:w-1/2 space-y-4 text-center md:text-left">
-        <span className="text-[#d4af37] font-bold text-xl tracking-widest">{year}</span>
+        <span className="text-[#d4af37] font-bold text-xl tracking-widest block">{year}</span>
         <h3 className="text-3xl font-bold text-white mb-2">{title}</h3>
         <p className="text-gray-300 leading-relaxed font-light text-lg">
           {desc}

@@ -1,3 +1,4 @@
+// src/sections/DonationSection.jsx
 import React, { useState } from 'react';
 import { Copy, Download, Check, Phone, Mail, MapPin, Building, QrCode, Share2, Wallet, X, ZoomIn, Save } from 'lucide-react';
 
@@ -37,20 +38,17 @@ export default function DonationSection() {
     ];
 
     const qrData = [
-        // ตรวจสอบ path รูปภาพให้ถูกต้อง
-        { name: 'พร้อมเพย์', img: '/images/qr1.webp', fileName: 'donataion_promtpay.webp', color: 'bg-[#003d68]' },
+        // ตรวจสอบชื่อไฟล์ให้ตรงกับใน folder public/images/
+        { name: 'พร้อมเพย์', img: '/images/qr1.webp', fileName: 'donation_promtpay.webp', color: 'bg-[#003d68]' },
     ];
 
     // --- Actions ---
-
-    // ฟังก์ชัน Copy เลขบัญชี
     const handleCopy = (text) => {
         navigator.clipboard.writeText(text);
         setCopied(text);
         setTimeout(() => setCopied(''), 2000);
     };
 
-    // ฟังก์ชันดาวน์โหลดรูปภาพ (รองรับ PC และ Mobile ส่วนใหญ่)
     const handleDownloadImage = (imgUrl, fileName) => {
         const link = document.createElement("a");
         link.href = imgUrl;
@@ -61,7 +59,8 @@ export default function DonationSection() {
     };
 
     return (
-        <section id="donate" className="relative py-24 px-4 bg-[#f8f5f0] overflow-hidden min-h-screen">
+        // ใช้ py-24 แทน min-h-screen เพื่อไม่ให้เกิดพื้นที่ว่างด้านล่าง
+        <section id="donate" className="relative py-24 px-4 bg-[#f8f5f0] overflow-hidden">
             
             {/* --- Lightbox Modal (Zoom View) --- */}
             {zoomImage && (
@@ -78,7 +77,6 @@ export default function DonationSection() {
                             onClick={(e) => e.stopPropagation()}
                         />
 
-                        {/* ปุ่ม Download ในหน้า Zoom */}
                         <button 
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -88,7 +86,6 @@ export default function DonationSection() {
                         >
                             <Download size={20} /> บันทึกรูปภาพ
                         </button>
-                        <p className="text-white/50 text-xs mt-3">หรือกดค้างที่รูปเพื่อบันทึก</p>
                     </div>
                 </div>
             )}
@@ -104,10 +101,10 @@ export default function DonationSection() {
                 </div>
 
                 {/* Main Card Container */}
-                <div className="bg-white rounded-[2rem] shadow-xl border border-[#d4af37]/20 overflow-hidden">
+                <div className="bg-white rounded-[2rem] shadow-xl border border-[#d4af37]/20 overflow-hidden min-h-[500px]">
                     
                     {/* Tab Navigation */}
-                    <div className="flex border-b border-gray-100">
+                    <div className="flex border-b border-gray-100 overflow-x-auto">
                         {[
                             { id: 'bank', icon: Wallet, label: 'เลขบัญชี' },
                             { id: 'qr', icon: QrCode, label: 'สแกน QR' },
@@ -116,11 +113,11 @@ export default function DonationSection() {
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`flex-1 py-5 flex items-center justify-center gap-2 text-sm md:text-base font-bold transition-all duration-300 relative
+                                className={`flex-1 py-5 min-w-[100px] flex items-center justify-center gap-2 text-sm md:text-base font-bold transition-all duration-300 relative
                                     ${activeTab === tab.id ? 'text-[#1a0b2e] bg-[#f8f5f0]' : 'text-gray-400 hover:text-[#b38728] hover:bg-gray-50'}`}
                             >
                                 <tab.icon size={18} />
-                                {tab.label}
+                                <span className="whitespace-nowrap">{tab.label}</span>
                                 {activeTab === tab.id && (
                                     <div className="absolute bottom-0 left-0 w-full h-1 bg-[#d4af37]"></div>
                                 )}
@@ -129,7 +126,7 @@ export default function DonationSection() {
                     </div>
 
                     {/* Content Body */}
-                    <div className="p-6 md:p-10 min-h-[400px]">
+                    <div className="p-6 md:p-10">
                         
                         {/* 1. BANK ACCOUNTS */}
                         {activeTab === 'bank' && (
@@ -146,7 +143,7 @@ export default function DonationSection() {
                                         </div>
                                         <button 
                                             onClick={() => handleCopy(acc.accNo)} 
-                                            className="p-3 rounded-full bg-gray-50 text-gray-400 hover:bg-[#b38728] hover:text-white transition-all active:scale-95"
+                                            className="p-3 rounded-full bg-gray-50 text-gray-400 hover:bg-[#b38728] hover:text-white transition-all active:scale-95 shrink-0"
                                         >
                                             {copied === acc.accNo ? <Check size={20} /> : <Copy size={20} />}
                                         </button>
@@ -155,12 +152,11 @@ export default function DonationSection() {
                             </div>
                         )}
 
-                        {/* 2. QR CODE (Download Logic Improved) */}
+                        {/* 2. QR CODE */}
                         {activeTab === 'qr' && (
                             <div className="animate-fade-in-up flex flex-col items-center">
-                                {/* Selector (ถ้ามีหลาย QR) */}
                                 {qrData.length > 1 && (
-                                    <div className="flex gap-2 mb-6">
+                                    <div className="flex gap-2 mb-6 flex-wrap justify-center">
                                         {qrData.map((qr, index) => (
                                             <button
                                                 key={index}
@@ -175,7 +171,6 @@ export default function DonationSection() {
                                     </div>
                                 )}
 
-                                {/* QR Display Card */}
                                 <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 relative group max-w-xs w-full">
                                     <div 
                                         className="aspect-square bg-[#f8f5f0] rounded-xl flex items-center justify-center overflow-hidden cursor-zoom-in relative"
@@ -185,6 +180,7 @@ export default function DonationSection() {
                                             src={qrData[selectedQrIndex].img} 
                                             alt="QR Code" 
                                             className="w-full h-full object-contain p-2"
+                                            onError={(e) => e.target.src = "https://placehold.co/300x300/f8f5f0/1a0b2e?text=QR+Code"}
                                         />
                                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center">
                                             <ZoomIn className="opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all text-[#1a0b2e]" />
@@ -192,7 +188,6 @@ export default function DonationSection() {
                                     </div>
                                 </div>
 
-                                {/* Actions */}
                                 <div className="mt-8 flex flex-col items-center gap-3 w-full max-w-xs">
                                     <button 
                                         onClick={() => handleDownloadImage(qrData[selectedQrIndex].img, qrData[selectedQrIndex].fileName)}
@@ -201,7 +196,6 @@ export default function DonationSection() {
                                         <Save size={20} className="text-[#d4af37]" /> 
                                         บันทึก QR Code
                                     </button>
-                                    
                                     <p className="text-xs text-gray-400 flex items-center gap-1">
                                         <Phone size={12} /> หากบันทึกไม่ได้ ให้กดค้างที่รูปภาพ
                                     </p>
@@ -220,16 +214,16 @@ export default function DonationSection() {
                                     </h3>
                                     
                                     <div className="grid gap-4">
-                                        <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
-                                            <div className="p-3 rounded-full bg-white/10"><Phone className="text-[#d4af37]" size={20} /></div>
-                                            <div>
+                                        <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                                            <div className="p-3 rounded-full bg-white/10 shrink-0"><Phone className="text-[#d4af37]" size={20} /></div>
+                                            <div className="overflow-hidden">
                                                 <p className="text-xs text-white/50 uppercase tracking-wider">Fax</p>
-                                                <p className="font-mono text-lg">02-281-6403</p>
+                                                <p className="font-mono text-lg truncate">02-281-6403</p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
-                                            <div className="p-3 rounded-full bg-white/10"><Mail className="text-[#d4af37]" size={20} /></div>
-                                            <div>
+                                        <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                                            <div className="p-3 rounded-full bg-white/10 shrink-0"><Mail className="text-[#d4af37]" size={20} /></div>
+                                            <div className="overflow-hidden">
                                                 <p className="text-xs text-white/50 uppercase tracking-wider">Email</p>
                                                 <p className="font-mono text-lg break-all">aintawongsa@yahoo.com</p>
                                             </div>

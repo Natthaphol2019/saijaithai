@@ -4,40 +4,35 @@ import { Award, BookOpen, Heart, Sparkles } from 'lucide-react';
 
 export default function ChairpersonSection() {
   return (
+    // ใช้ py-24 แทน min-h-screen เพื่อความสูงที่พอดีกับเนื้อหา
     <section className="py-24 px-6 bg-gradient-to-b from-[#1a0526] to-[#2a0e38] relative overflow-hidden text-[#fcf6ba]">
       
-      {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#bf953f] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#d4af37] rounded-full blur-[120px] opacity-5 pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-12 gap-16 items-center">
           
-          {/* --- ส่วนรูปภาพ (ซ้าย) --- */}
+          {/* --- รูปภาพ (ซ้าย) --- */}
           <div className="lg:col-span-5 relative">
             <div className="relative z-10 rounded-t-full rounded-b-2xl p-3 border-2 border-[#d4af37]/30 bg-[#d4af37]/5 backdrop-blur-sm">
               <div className="aspect-[3/4] rounded-t-full rounded-b-xl overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.15)] relative group">
-                {/* รูป: แนะนำให้ใช้รูป [Image 20] หรือ [Image 21] จากไฟล์ Word */}
                 <img 
                   src="/images/images1002.webp" 
                   alt="สมเด็จพระกนิษฐาธิราชเจ้าฯ" 
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   onError={(e) => {
-                    e.target.src = "https://placehold.co/600x800/2a0e38/d4af37?text=Royal+Portrait"; // รูปสำรอง
+                    e.target.src = "https://placehold.co/600x800/2a0e38/d4af37?text=Royal+Portrait"; 
                   }}
                 />
-                {/* Overlay สีทองบางๆ */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2a0e38]/80 via-transparent to-transparent"></div>
               </div>
             </div>
-            
-            {/* กรอบลอยด้านหลัง */}
             <div className="absolute top-10 -right-6 w-full h-full border-2 border-[#b38728]/20 rounded-t-full rounded-b-2xl -z-10 hidden md:block"></div>
           </div>
 
-          {/* --- ส่วนเนื้อหา (ขวา) --- */}
+          {/* --- เนื้อหา (ขวา) --- */}
           <div className="lg:col-span-7 space-y-10 text-left">
-            
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30">
                 <Sparkles size={16} className="text-[#d4af37]" />
@@ -57,7 +52,6 @@ export default function ChairpersonSection() {
               ทรงเอาพระทัยใส่ในทุกข์สุขของผู้บาดเจ็บทุพพลภาพ และทรงส่งเสริมการสร้างอาชีพให้พวกเขามีชีวิตใหม่อย่างมีศักดิ์ศรี
             </p>
 
-            {/* Cards ข้อมูลย่อย */}
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="bg-[#fffdf5]/5 border border-[#d4af37]/20 p-6 rounded-xl hover:bg-[#d4af37]/10 transition-colors duration-300">
                 <BookOpen className="text-[#d4af37] mb-4" size={32} />
@@ -78,7 +72,6 @@ export default function ChairpersonSection() {
               </div>
             </div>
 
-            {/* Quote */}
             <blockquote className="border-l-4 border-[#d4af37] pl-6 py-2 relative">
                <span className="text-6xl text-[#d4af37]/20 font-serif absolute -top-6 -left-2">"</span>
                <p className="italic text-[#fcf6ba]/90 text-lg relative z-10">

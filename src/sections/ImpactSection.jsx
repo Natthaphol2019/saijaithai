@@ -36,13 +36,7 @@ export default function ImpactSection() {
   ];
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden bg-[#1a0b2e]">
-      
-      {/* Background Decoration - ลด Blur ลงเพื่อ Performance ที่ดีขึ้นบนมือถือ */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d4af37] rounded-full blur-[100px] opacity-5 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#bf953f] rounded-full blur-[80px] opacity-5 pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
+    <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header Section */}
         <div className="text-center mb-20 space-y-6">
@@ -61,28 +55,24 @@ export default function ImpactSection() {
           </p>
         </div>
 
-        {/* Grid Cards - ใช้ CSS Hover แทน JS Animation */}
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Grid Cards */}
+        <div className="grid md:grid-cols-3 gap-8 px-6 md:px-0">
           {impacts.map((item) => (
             <div 
               key={item.id}
               onClick={() => setSelectedItem(item)}
               className="group relative bg-[#2a0e38]/40 backdrop-blur-md border border-[#b38728]/30 rounded-3xl overflow-hidden hover:border-[#d4af37]/60 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 cursor-pointer hover:-translate-y-2"
             >
-              {/* Image Area */}
               <div className="h-64 overflow-hidden relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d0221] to-transparent z-10 opacity-80"></div>
                 <img 
                   src={item.img} 
                   alt={item.title} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  onError={(e) => {
-                    e.target.src = "https://placehold.co/600x400/2a0e38/d4af37?text=Sai+Jai+Thai";
-                  }}
+                  onError={(e) => { e.target.src = "https://placehold.co/600x400/2a0e38/d4af37?text=Sai+Jai+Thai"; }}
                 />
               </div>
 
-              {/* Text Content */}
               <div className="p-8 pt-10">
                 <h3 className="text-2xl font-bold text-[#fcf6ba] mb-3 group-hover:text-[#d4af37] transition-colors">
                   {item.title}
@@ -90,8 +80,6 @@ export default function ImpactSection() {
                 <p className="text-[#fcf6ba]/60 text-sm leading-relaxed mb-6 font-light line-clamp-3">
                   {item.desc}
                 </p>
-                
-                {/* Learn More Link */}
                 <div className="flex items-center gap-2 text-[#d4af37] text-sm font-bold opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                   อ่านเรื่องราวเต็ม <ArrowRight size={16} />
                 </div>
@@ -99,63 +87,46 @@ export default function ImpactSection() {
             </div>
           ))}
         </div>
-      </div>
 
-      {/* --- Modal Section (Static Logic / ลื่นไหลกว่า) --- */}
-      {selectedItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onClick={() => setSelectedItem(null)}></div>
+        {/* Modal Section */}
+        {selectedItem && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onClick={() => setSelectedItem(null)}></div>
+            <div className="relative w-full max-w-5xl bg-[#1a0b2e] border border-[#d4af37] rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row z-10 max-h-[90vh]">
+               <button onClick={() => setSelectedItem(null)} className="absolute top-4 right-4 z-20 bg-black/40 text-white p-2 rounded-full hover:bg-[#d4af37] hover:text-black transition backdrop-blur-sm">
+                 <X size={24} />
+               </button>
 
-          {/* Modal Content */}
-          <div className="relative w-full max-w-5xl bg-[#1a0b2e] border border-[#d4af37] rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row z-10 max-h-[90vh]">
-             <button onClick={() => setSelectedItem(null)} className="absolute top-4 right-4 z-20 bg-black/40 text-white p-2 rounded-full hover:bg-[#d4af37] hover:text-black transition backdrop-blur-sm">
-               <X size={24} />
-             </button>
+               <div className="md:w-1/2 relative h-64 md:h-auto shrink-0">
+                   <img src={selectedItem.img} className="w-full h-full object-cover" alt={selectedItem.title} />
+                   <div className="absolute inset-0 bg-gradient-to-t from-[#1a0b2e] via-transparent to-transparent md:bg-gradient-to-r"></div>
+               </div>
 
-             {/* รูปภาพฝั่งซ้าย */}
-             <div className="md:w-1/2 relative h-64 md:h-auto shrink-0">
-                 <img 
-                   src={selectedItem.img} 
-                   className="w-full h-full object-cover"
-                   alt={selectedItem.title}
-                 />
-                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a0b2e] via-transparent to-transparent md:bg-gradient-to-r"></div>
-             </div>
-
-             {/* เนื้อหาฝั่งขวา */}
-             <div className="md:w-1/2 p-8 md:p-12 flex flex-col bg-[#1a0b2e] overflow-y-auto">
-                 <div className="flex items-center gap-2 mb-4 text-[#d4af37]">
-                    <Sparkles size={18}/>
-                    <span className="text-sm font-bold uppercase tracking-wider">ภารกิจสายใจไทย</span>
-                 </div>
-                 
-                 <h3 className="text-3xl md:text-4xl font-bold text-[#d4af37] mb-6 font-serif leading-tight">
-                    {selectedItem.title}
-                 </h3>
-
-                 <div className="w-20 h-1 bg-[#d4af37]/30 mb-8 shrink-0"></div>
-
-                 <div className="space-y-6">
-                    <p className="text-[#fcf6ba]/90 text-lg leading-relaxed font-light">
-                      {selectedItem.longDesc}
-                    </p>
-                    
-                    <div className="pt-6 border-t border-[#fcf6ba]/10 flex items-center justify-between">
-                        <div>
-                            <div className="text-[#fcf6ba]/60 text-sm">ผลลัพธ์สะสม</div>
-                            <div className="text-2xl font-bold text-[#d4af37]">{selectedItem.stat}</div>
-                        </div>
-                        <button onClick={() => setSelectedItem(null)} className="px-6 py-2 border border-[#d4af37] text-[#d4af37] rounded-full hover:bg-[#d4af37] hover:text-[#1a0b2e] transition">
-                            ปิดหน้าต่าง
-                        </button>
-                    </div>
-                 </div>
-             </div>
+               <div className="md:w-1/2 p-8 md:p-12 flex flex-col bg-[#1a0b2e] overflow-y-auto">
+                   <div className="flex items-center gap-2 mb-4 text-[#d4af37]">
+                      <Sparkles size={18}/>
+                      <span className="text-sm font-bold uppercase tracking-wider">ภารกิจสายใจไทย</span>
+                   </div>
+                   <h3 className="text-3xl md:text-4xl font-bold text-[#d4af37] mb-6 font-serif leading-tight">
+                      {selectedItem.title}
+                   </h3>
+                   <div className="w-20 h-1 bg-[#d4af37]/30 mb-8 shrink-0"></div>
+                   <div className="space-y-6">
+                      <p className="text-[#fcf6ba]/90 text-lg leading-relaxed font-light">{selectedItem.longDesc}</p>
+                      <div className="pt-6 border-t border-[#fcf6ba]/10 flex items-center justify-between">
+                         <div>
+                             <div className="text-[#fcf6ba]/60 text-sm">ผลลัพธ์สะสม</div>
+                             <div className="text-2xl font-bold text-[#d4af37]">{selectedItem.stat}</div>
+                         </div>
+                         <button onClick={() => setSelectedItem(null)} className="px-6 py-2 border border-[#d4af37] text-[#d4af37] rounded-full hover:bg-[#d4af37] hover:text-[#1a0b2e] transition">
+                             ปิดหน้าต่าง
+                         </button>
+                      </div>
+                   </div>
+               </div>
+            </div>
           </div>
-        </div>
-      )}
-
-    </section>
+        )}
+    </div>
   );
 }
