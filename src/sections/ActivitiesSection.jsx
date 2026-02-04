@@ -1,33 +1,52 @@
 // src/sections/ActivitiesSection.jsx
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react'; // เพิ่ม icon Quote เพื่อความสวยงาม (ถ้าไม่มีให้ลบออกได้ครับ)
 import TimelineItem from './TimelineItem'; 
 
 export default function ActivitiesSection() {
   return (
-    <div className="max-w-6xl mx-auto px-6">
+    // เพิ่ม max-w-7xl เพื่อให้กว้างขึ้นบนจอ PC และ lg:px-12
+    <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 lg:py-20"> 
       
       {/* Header */}
-      <div className="text-center mb-24 space-y-8">
-        <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] leading-relaxed py-2 drop-shadow-lg">
-          "ช่วยเพื่อให้เขา... ช่วยเหลือตนเองได้"
-        </h2>
+      <div className="text-center mb-24 lg:mb-32 space-y-12">
         
-        <div className="bg-[#2a0e38]/40 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto border border-[#b38728]/30 hover:border-[#d4af37]/50 transition-all duration-500">
-          <p className="text-[#fcf6ba]/90 text-2xl font-light italic leading-relaxed">
-            "การสงเคราะห์ทหารผ่านศึกนั้น... ขอให้ช่วยเพื่อให้เขาช่วยเหลือตัวเองได้ ไม่ใช่ให้เขาตลอดไป"
-          </p>
+        {/* Main Title - ปรับให้ใหญ่และมีมิติขึ้นบน PC */}
+        <div className="relative inline-block">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#aa771c] leading-tight py-4 drop-shadow-2xl">
+              "ช่วยเพื่อให้เขา... <br className="hidden lg:block" />ช่วยเหลือตนเองได้"
+            </h2>
+            {/* Glow effect ด้านหลัง (เฉพาะจอใหญ่) */}
+            <div className="hidden lg:block absolute -inset-4 bg-[#bf953f]/20 blur-3xl rounded-full opacity-40 -z-10"></div>
         </div>
         
-        <div className="inline-flex items-center gap-3 bg-[#2a0e38]/60 py-3 px-6 rounded-full border border-[#b38728]/50 shadow-md">
-          <Star size={16} className="text-[#d4af37]" />
-          <span className="text-[#d4af37] font-bold tracking-widest uppercase text-sm">พระราชดำรัส รัชกาลที่ ๙</span>
-          <Star size={16} className="text-[#d4af37]" />
+        {/* Quote Box - เพิ่มความกว้าง Padding และ Effect กระจก */}
+        <div className="relative group max-w-5xl mx-auto">
+            <div className="bg-[#2a0e38]/60 backdrop-blur-md rounded-3xl p-8 lg:p-14 border border-[#b38728]/30 hover:border-[#d4af37]/60 transition-all duration-700 shadow-xl hover:shadow-[0_0_30px_rgba(191,149,63,0.15)]">
+                
+                {/* Decorative Quote Icon (ถ้ามี import Quote) */}
+                <Quote className="absolute top-6 left-6 lg:top-10 lg:left-10 text-[#d4af37]/20 w-8 h-8 lg:w-16 lg:h-16 -scale-x-100" />
+                
+                <p className="text-[#fcf6ba]/90 text-2xl lg:text-3xl font-light italic leading-relaxed tracking-wide relative z-10 px-2 lg:px-8">
+                  "การสงเคราะห์ทหารผ่านศึกนั้น... <span className="text-white font-normal text-shadow-sm">ขอให้ช่วยเพื่อให้เขาช่วยเหลือตัวเองได้</span> ไม่ใช่ให้เขาตลอดไป"
+                </p>
+
+                <Quote className="absolute bottom-6 right-6 lg:bottom-10 lg:right-10 text-[#d4af37]/20 w-8 h-8 lg:w-16 lg:h-16" />
+            </div>
+        </div>
+        
+        {/* Badge - เพิ่มความชัดและ Interaction */}
+        <div className="inline-flex items-center gap-4 bg-[#1a0524]/80 backdrop-blur px-8 py-3 lg:py-4 rounded-full border border-[#b38728]/50 shadow-lg hover:scale-105 hover:bg-[#2a0e38] transition-transform duration-300 cursor-default">
+          <Star size={18} className="text-[#d4af37] animate-pulse" />
+          <span className="text-[#d4af37] font-semibold tracking-[0.2em] uppercase text-sm lg:text-base">
+            พระราชดำรัส รัชกาลที่ ๙
+          </span>
+          <Star size={18} className="text-[#d4af37] animate-pulse" />
         </div>
       </div>
 
-      {/* Timeline Content */}
-      <div className="space-y-16">
+      {/* Timeline Content - ขยายระยะห่างระหว่าง Item บน PC */}
+      <div className="space-y-20 lg:space-y-32">
         <TimelineItem 
           year="๒ เม.ย. ๒๕๑๘" 
           title="กำเนิดสายใจไทย" 
